@@ -1,28 +1,23 @@
 public enum Roma {
-    I("I", 1),
-    II("II", 2),
-    III("III", 3),
-    IV("IV", 4),
-    V("V", 5),
-    VI("VI", 6),
-    VII("VII", 7),
-    VIII("VIII", 8),
-    IX("IX", 9),
-    X("X", 10);
+    I("I"),
+    II("II"),
+    III("III"),
+    IV("IV"),
+    V("V"),
+    VI("VI"),
+    VII("VII"),
+    VIII("VIII"),
+    IX("IX"),
+    X("X");
 
 
-    private int value;
+
     private String key;
 
-    Roma(String key, int value) {
-        this.value = value;
+    Roma(String key) {
         this.key = key;
     }
 
-
-    public int getValue() {
-        return value;
-    }
 
     public String getKey() {
             return key;

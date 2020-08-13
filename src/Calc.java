@@ -3,6 +3,7 @@ import exceptions.NullDivException;
 import exceptions.WrongOperationException;
 
 import java.lang.reflect.Constructor;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Calc {
@@ -24,10 +25,10 @@ public class Calc {
             for(Roma r : Roma.values()){
 
                 if(str[0].equals(r.getKey())){
-                    first = r.getValue();
+                    first = num(str[0]);
                 }
                 if(str[2].equals(r.getKey())){
-                    second = r.getValue();
+                    second = num(str[2]);
                     try {
                        String res = Convert.con(operation(first, second, op));
                        if(res.equals(null)){
@@ -82,6 +83,42 @@ public class Calc {
         if((first < 0 || first > 10) || (second <0 || second > 10)){
             throw new CheckNumberException("ЧИСЛО НЕ ДОЛЖНО БЫТЬ БОЛЬШЕ 10 И МЕНЬШЕ ЧЕМ 0");
         }
+    }
+
+    private int num(String n) {
+        HashMap<Character, Integer> romeNumbers = new HashMap<>();
+
+
+        romeNumbers.put('I', 1);
+        romeNumbers.put('V', 5);
+        romeNumbers.put('X', 10);
+        romeNumbers.put('L', 50);
+        romeNumbers.put('C', 100);
+        romeNumbers.put('D', 500);
+        romeNumbers.put('M', 1000);
+
+        int tmp = 0;
+        int res = 0;
+
+        for (char c : n.toCharArray()) {
+
+            int v = romeNumbers.get(c);
+            if (v < tmp) {
+                res += tmp;
+                tmp = v;
+            } else if (v > tmp) {
+                if (tmp == 0)
+                    tmp = v;
+                else {
+                    res += v - tmp;
+                    tmp = 0;
+                }
+            } else if (v == tmp) {
+                res += v + tmp;
+                tmp = 0;
+            }
+        }
+        return res + tmp;
     }
 
 
